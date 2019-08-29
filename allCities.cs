@@ -7,8 +7,7 @@ namespace ConsoleApp4
 {
     class waCity
     {
-        
-
+       
         public void GenerateFile(string sAttr, string path, string rando)
         {
             string timeStamp = GetTimestamp(DateTime.Now);

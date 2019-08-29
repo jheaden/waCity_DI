@@ -28,43 +28,75 @@ namespace ConsoleApp4
         private static void CityController(string sAttr, string path, string rando)
         {
             //prompt user for selection
-            
             while (sAttr != "x")
             {
                 switch (sAttr)
                 {
                     case "Renton":
-                        Console.WriteLine("Renton");
+                        Console.WriteLine("Renton confirmed");
+                        InstantiateACity(sAttr, path, rando);
                         sAttr = "x";
-                        instantiateACity(sAttr, path, rando);
                         break;
                     case "Pasco":
-                        Console.WriteLine("Pasco");
-                        instantiateACity(sAttr, path, rando);
-                        doPascoStuff(sAttr, path, rando);
+                        Console.WriteLine("Pasco confirmed");
+                        InstantiateACity(sAttr, path, rando);
+                        DoPascoStuff(sAttr, path, rando);
                         sAttr = "x";
                         break;
-                    case "s":
-                        Console.WriteLine("SeaTac");
-                        instantiateACity(sAttr, path, rando);
+                    case "SeaTac":
+                        Console.WriteLine("SeaTac confirmed");
+                        InstantiateACity(sAttr, path, rando);
+                        DoSeaTacStuff(sAttr, path, rando);
                         sAttr = "x";
                         break;
                     default:
                         Console.WriteLine("Something is terribly wrong!");
                         Console.ReadLine();
+                        sAttr = "x";
                         break;
                 }
-
-
             }
 
         }
 
-        private static void doPascoStuff(string sAttr, string path, string rando)
+        // Write another text file to the c:\temp folder - Random.txt
+        // Create Random.txt if it is not there.
+        // Append a random number 1-1000 to the end of the file.
+        private static void DoSeaTacStuff(string sAttr, string path, string rando)
         {
-            //Open the file just written and 
-            // append to the end of the file on a new line another random number 1-1000 preceeded by the text "Pasco".
+            Console.WriteLine("Do SeaTac Stuff confirmed!" + sAttr + path + rando);
 
+            //look for Random.txt
+            string fileName = "Random.txt";
+            string fullRandoPathName = @path + fileName;
+
+            if (File.Exists(fullRandoPathName)) {
+                Console.WriteLine("Random.txt found");
+
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(@path, fullRandoPathName), true))
+                {
+                    outputFile.WriteLine(rando);
+                    Console.WriteLine("\n" + "Random.txt appended with random number successfully!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Random.txt NOT found");
+
+                using (StreamWriter writer = new StreamWriter(fullRandoPathName))
+                {
+                    writer.Write(rando);
+                }
+                Console.WriteLine("Random.txt created and appended successfully.");
+
+
+            }
+        }
+
+        //Open the file just written and 
+        // append to the end of the file on a new line another random number 1-1000 preceeded by the text "Pasco".
+        private static void DoPascoStuff(string sAttr, string path, string rando)
+        {
             string Folder = @path;
             var files = new System.IO.DirectoryInfo(Folder).GetFiles("*.txt");
             string latestfile = "";
@@ -90,12 +122,10 @@ namespace ConsoleApp4
                 outputFile.WriteLine("Hello, appendage! " + ConfigurationManager.AppSettings.Get("City") + " " + rando);
                 Console.WriteLine("\n" + sAttr + " appended successfully!");
             }
-
         }
 
        
-
-        private static void instantiateACity(string sAttr, string path, string rando)
+        private static void InstantiateACity(string sAttr, string path, string rando)
         {
             waCity newCity = new waCity();
             newCity.GenerateFile(sAttr, path, rando);
