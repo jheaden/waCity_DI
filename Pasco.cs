@@ -14,6 +14,12 @@ namespace ConsoleApp4
             path = ppath;
             rando = prando;
 
+            AppendRandoToLatestFile(path);
+
+        }
+
+       void AppendRandoToLatestFile(string path)
+        {
             string Folder = @path;
             var files = new System.IO.DirectoryInfo(Folder).GetFiles("*.txt");
             string latestfile = "";
@@ -28,19 +34,16 @@ namespace ConsoleApp4
                     latestfile = fileX.Name;
                 }
             }
-            //Show the name of the latestfile
-            Console.Write("Latest File Name: " + latestfile);
 
-            //open latest file, append the city's name and a random number to the end of the contents, save the file to the new name of the city plus latest timestamp
-            string docPath = (path);
+           // string docPath = (path);
 
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, latestfile), true))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(path, latestfile), true))
             {
                 outputFile.WriteLine("Hello, appendage! " + ConfigurationManager.AppSettings.Get("City") + " " + rando);
                 Console.WriteLine("\n" + sAttr + " appended successfully!");
             }
-
         }
+
 
     }
 

@@ -24,7 +24,7 @@ namespace ConsoleApp4
             {
                 writer.Write(rando);
             }
-            Console.WriteLine(FILE_NAME + " created successfully!");
+            Console.WriteLine(FILE_NAME + " created successfully.");
 
         }
 

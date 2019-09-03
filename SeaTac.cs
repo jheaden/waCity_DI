@@ -17,7 +17,12 @@ namespace ConsoleApp4
             path = spath;
             rando = srando;
 
-            //look for Random.txt
+            FindOrCreateRandomTXT(path);
+
+        }
+
+        void FindOrCreateRandomTXT(string path)
+        {
             string fileName = "Random.txt";
             string fullRandoPathName = @path + fileName;
 
@@ -28,7 +33,7 @@ namespace ConsoleApp4
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(@path, fullRandoPathName), true))
                 {
                     outputFile.WriteLine(rando);
-                    Console.WriteLine("\n" + "Random.txt appended with random number successfully!");
+                    Console.WriteLine("\n" + "Random.txt appended with random number successfully.");
                 }
             }
             else
@@ -42,7 +47,6 @@ namespace ConsoleApp4
                 Console.WriteLine("Random.txt created and appended successfully.");
             }
         }
-
     }  
 
 }

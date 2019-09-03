@@ -49,7 +49,7 @@ namespace ConsoleApp4
                         sAttr = "x";
                         break;
                     default:
-                        Console.WriteLine("Something is terribly wrong.");
+                        Console.WriteLine("Something is terribly wrong");
                         Console.ReadLine();
                         sAttr = "x";
                         break;
