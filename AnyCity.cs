@@ -5,9 +5,13 @@ using System.Text;
 
 namespace ConsoleApp4
 {
-    class waCity
-    {
-       
+    public class AnyCity : IAnyCity   {
+
+        public string sAttr { get; set; }
+        public string path { get; set; }
+        public string rando { get; set; }
+
+
         public void GenerateFile(string sAttr, string path, string rando)
         {
             string timeStamp = GetTimestamp(DateTime.Now);
@@ -15,6 +19,7 @@ namespace ConsoleApp4
 
             //create the text file at the specified PATH
             string file = @path + FILE_NAME + ".txt";
+
             using (StreamWriter writer = new StreamWriter(file))
             {
                 writer.Write(rando);
@@ -26,7 +31,8 @@ namespace ConsoleApp4
         private string GetTimestamp(DateTime value)
         { 
             return value.ToString("MM-dd-yyyy_hhmmtt").ToLower();
-         
         }
+
+      
     }
 }
